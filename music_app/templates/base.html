@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Sharing App</title>
+  <style>
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+    }
+
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav ul li {
+      display: inline;
+      margin-right: 10px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    footer {
+      background-color: #f2f2f2;
+      padding: 10px;
+      text-align: center;
+    }
+  </style>
+
+{% comment %} <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+<script src="{% static 'js/main.js' %}"></script> {% endcomment %}
+{% comment %} {% load static %} add this at the top of base.html .... {% endcomment %} 
+
+</head>
+
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/register/">Register</a></li>
+        <li><a href="/login/">Login</a></li>
+        <li><a href="/logout/">Logout</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'upload_music' %}">Upload Music</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+
+
+  </header>
+
+  <main>
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Music Sharing App. All rights reserved.</p>
+  </footer>
+</body>
+</html>

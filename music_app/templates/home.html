@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Welcome {{ user.username }}!</h2>
+
+  {% if user.is_authenticated %}
+  <fieldset>
+  <legend>
+  <h3>Your Music Files</h3>
+  </legend>
+  {% for music_file in user_music_files %}
+    <div>
+      <h4>{{ music_file.title }}</h4>
+      <p>Uploaded by: {{ music_file.uploaded_by.username }}</p>
+      <p>Uploaded at: {{ music_file.uploaded_at }}</p>
+      <audio controls>
+        <source src="{{ music_file.file.url }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  {% endfor %}
+  {% endif %}
+  </fieldset>
+
+  {% if user.is_authenticated %}
+  <fieldset>
+  <legend>
+  <h3>Public Music Files</h3>
+  </legend>
+  {% for public_file in public_music_files %}
+    <div>
+      <h4>{{ public_file.title }}</h4>
+      <p>Uploaded by: {{ public_file.uploaded_by.username }}</p>
+      <p>Uploaded at: {{ public_file.uploaded_at }}</p>
+      <audio controls>
+        <source src="{{ public_file.file.url }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  {% endfor %}
+  {% endif %}
+  </fieldset>
+  
+  {% if user.is_authenticated %}
+  <fieldset>
+  <legend>
+  <h3>Protected Music Files</h3>
+  </legend>
+  {% for protected_file in protected_music_files %}
+    <div>
+      <h4>{{ protected_file.title }}</h4>
+      <p>Uploaded by: {{ protected_file.uploaded_by.username }}</p>
+      <p>Uploaded at: {{ protected_file.uploaded_at }}</p>
+      <audio controls>
+        <source src="{{ protected_file.file.url }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  {% endfor %}
+  {% for music_file in user.protected_music_files.all %}
+      <div>
+        <h4>{{ music_file.title }}</h4>
+        <p>Uploaded by: {{ music_file.uploaded_by.username }}</p>
+        <p>Uploaded at: {{ music_file.uploaded_at }}</p>
+        <audio controls>
+          <source src="{{ music_file.file.url }}" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    {% endfor %}
+  {% endif %}
+  </fieldset>
+{% endblock %}

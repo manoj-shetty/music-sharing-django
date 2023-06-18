@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>My Music</h2>
+  {% if my_music_files %}
+    {% for music_file in my_music_files %}
+      <div>
+        <h4>{{ music_file.title }}</h4>
+        <p>Uploaded at: {{ music_file.uploaded_at }}</p>
+        <audio controls>
+          <source src="{{ music_file.file.url }}" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No music files uploaded.</p>
+  {% endif %}
+{% endblock %}
